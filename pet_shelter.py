@@ -3,7 +3,6 @@ import sqlite3
 
 conn = sqlite3.connect(":memory:")
 conn.execute("CREATE TABLE pets (id INTEGER PRIMARY KEY, name TEXT, species TEXT, age INTEGER, adopted INTEGER)")
-adoption_count = 0
 
 
 def registerPet(name, species, age, tags=None):
@@ -18,9 +17,7 @@ def registerPet(name, species, age, tags=None):
 
 
 def adopt(pet_id):
-    global adoption_count
     conn.execute("UPDATE pets SET adopted = 1 WHERE id = ?", (pet_id,))
-    adoption_count += 1
 
 
 def adoptionCode():
@@ -44,7 +41,10 @@ def clearUnadopted():
 
 
 def shelterStatus():
-    if adoption_count > 0:
+    count = conn.execute(
+        "SELECT COUNT(*) FROM pets WHERE adopted = 1"
+    ).fetchone()[0]
+    if count > 0:
         return "active"
     return "quiet"
 
