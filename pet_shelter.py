@@ -3,7 +3,10 @@ import secrets
 import sqlite3
 
 conn = sqlite3.connect(":memory:")
-conn.execute("CREATE TABLE pets (id INTEGER PRIMARY KEY, name TEXT, species TEXT, age INTEGER, adopted INTEGER)")
+conn.execute(
+    "CREATE TABLE pets (id INTEGER PRIMARY KEY, name TEXT, "
+    "species TEXT, age INTEGER, adopted INTEGER)"
+)
 
 
 def register_pet(name, species, age, tags=None):
