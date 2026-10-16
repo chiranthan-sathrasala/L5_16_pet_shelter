@@ -6,7 +6,9 @@ conn.execute("CREATE TABLE pets (id INTEGER PRIMARY KEY, name TEXT, species TEXT
 adoption_count = 0
 
 
-def registerPet(name, species, age, tags=[]):
+def registerPet(name, species, age, tags=None):
+    if tags is None:
+        tags = []
     conn.execute(
         "INSERT INTO pets (name, species, age, adopted) VALUES (?, ?, ?, 0)",
         (name, species, age),
