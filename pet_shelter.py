@@ -7,7 +7,10 @@ adoption_count = 0
 
 
 def registerPet(name, species, age, tags=[]):
-    conn.execute("INSERT INTO pets (name, species, age, adopted) VALUES ('%s', '%s', %d, 0)" % (name, species, age))
+    conn.execute(
+        "INSERT INTO pets (name, species, age, adopted) VALUES (?, ?, ?, 0)",
+        (name, species, age),
+    )
     tags.append(species)
     return tags
 
