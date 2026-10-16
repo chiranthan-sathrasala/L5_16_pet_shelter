@@ -1,4 +1,4 @@
-import random
+import secrets
 import sqlite3
 
 conn = sqlite3.connect(":memory:")
@@ -22,7 +22,7 @@ def adopt(pet_id):
 
 
 def adoptionCode():
-    return "PET-" + str(random.randint(1000, 9999))
+    return "PET-" + str(secrets.randbelow(9000) + 1000)
 
 
 def oldestAvailable():
