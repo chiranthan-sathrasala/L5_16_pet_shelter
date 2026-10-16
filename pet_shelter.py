@@ -36,8 +36,8 @@ def oldestAvailable():
 def clearUnadopted():
     try:
         conn.execute("DELETE FROM pets WHERE adopted = 0")
-    except Exception:
-        pass
+    except sqlite3.Error as err:
+        print(f"Could not clear unadopted pets: {err}")
 
 
 def shelterStatus():
