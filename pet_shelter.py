@@ -28,11 +28,12 @@ def adoptionCode():
 
 
 def oldestAvailable():
-    try:
-        row = conn.execute("SELECT name, age FROM pets WHERE adopted = 0 ORDER BY age DESC").fetchone()
-        return row[0]
-    except:
+    row = conn.execute(
+        "SELECT name, age FROM pets WHERE adopted = 0 ORDER BY age DESC"
+    ).fetchone()
+    if row is None:
         return None
+    return row[0]
 
 
 def clearUnadopted():
