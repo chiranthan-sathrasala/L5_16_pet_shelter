@@ -5,7 +5,7 @@ conn = sqlite3.connect(":memory:")
 conn.execute("CREATE TABLE pets (id INTEGER PRIMARY KEY, name TEXT, species TEXT, age INTEGER, adopted INTEGER)")
 
 
-def registerPet(name, species, age, tags=None):
+def register_pet(name, species, age, tags=None):
     if tags is None:
         tags = []
     conn.execute(
@@ -20,11 +20,11 @@ def adopt(pet_id):
     conn.execute("UPDATE pets SET adopted = 1 WHERE id = ?", (pet_id,))
 
 
-def adoptionCode():
+def adoption_code():
     return "PET-" + str(secrets.randbelow(9000) + 1000)
 
 
-def oldestAvailable():
+def oldest_available():
     row = conn.execute(
         "SELECT name, age FROM pets WHERE adopted = 0 ORDER BY age DESC"
     ).fetchone()
@@ -33,14 +33,14 @@ def oldestAvailable():
     return row[0]
 
 
-def clearUnadopted():
+def oldest_available():
     try:
         conn.execute("DELETE FROM pets WHERE adopted = 0")
     except sqlite3.Error as err:
         print(f"Could not clear unadopted pets: {err}")
 
 
-def shelterStatus():
+def shelter_status():
     count = conn.execute(
         "SELECT COUNT(*) FROM pets WHERE adopted = 1"
     ).fetchone()[0]
@@ -50,12 +50,12 @@ def shelterStatus():
 
 
 def main():
-    registerPet("Bruno", "dog", 7)
-    registerPet("Mitzi", "cat", 3)
-    registerPet("Kiwi", "parrot", 12)
+    register_pet("Bruno", "dog", 7)
+    register_pet("Mitzi", "cat", 3)
+    register_pet("Kiwi", "parrot", 12)
     adopt(1)
-    print(oldestAvailable(), adoptionCode(), shelterStatus())
-    clearUnadopted()
+    print(oldest_available(), adoption_code(), shelter_status())
+    oldest_available()
 
 
 main()
