@@ -15,5 +15,12 @@ Line numbers refer to the original file (before fixes).
 | Line too long (Flake8 E501, Pylint C0301) | Style | 5, 10, 27 | Lines were 103-116 characters, over the 79 (Flake8) and 100 (Pylint) limits. | Wrapped the CREATE TABLE string, the INSERT call and the SELECT query across multiple lines. |
 | Multiple statements on one line (Flake8 E701, Pylint C0321) | Style | 41 | `if ...: return ...` was on a single line. | Moved the `return` onto its own indented line. |
 | f-string suggestion (Pylint C0209) | Style | 10 | `%` formatting used for a string. | Resolved by switching to a parameterized query. |
-| Blank-line spacing (Flake8 E302, E305) | Style | 11, 32, 69 (after fixes) | Top-level functions need exactly two blank lines around them. | Added the missing blank lines. |
 | Missing `__main__` guard (not flagged by any tool) | Design | 54 | `main()` ran on import, so importing the module would execute the demo. | Wrapped the call in `if __name__ == "__main__":`. |
+
+## Results
+
+| Tool | Before | After |
+|------|--------|-------|
+| Pylint | 3.95/10 | 10.00/10 |
+| Bandit | 3 issues (1 Medium, 2 Low) | No issues |
+| Flake8 | 5 issues | No issues |
