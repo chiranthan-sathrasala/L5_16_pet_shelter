@@ -44,7 +44,8 @@ def clearUnadopted():
 
 
 def shelterStatus():
-    if adoption_count > 0: return "active"
+    if adoption_count > 0:
+        return "active"
     return "quiet"
 
 
